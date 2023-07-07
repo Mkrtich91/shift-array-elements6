@@ -11,8 +11,49 @@
         /// <exception cref="ArgumentNullException">iterations array is null.</exception>
         public static void Shift(int[] source, int[] iterations)
         {
-            // TODO #2. Implement the method using "for" statements and Array.Copy method.
-            throw new NotImplementedException();
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (iterations == null)
+            {
+                throw new ArgumentNullException(nameof(iterations));
+            }
+
+            for (int i = 0; i < iterations.Length; i++)
+            {
+                int currentIteration = iterations[i];
+
+                if (i % 2 == 0) // Even index or zero index indicates left shift iterations
+                {
+                    for (int j = 0; j < currentIteration; j++)
+                    {
+                        ShiftLeft(source);
+                    }
+                }
+                else // Odd index indicates right shift iterations
+                {
+                    for (int j = 0; j < currentIteration; j++)
+                    {
+                        ShiftRight(source);
+                    }
+                }
+            }
+
+            static void ShiftLeft(int[] source)
+            {
+                int firstElement = source[0];
+                Array.Copy(source, 1, source, 0, source.Length - 1);
+                source[^1] = firstElement;
+            }
+
+            static void ShiftRight(int[] source)
+            {
+                int lastElement = source[^1];
+                Array.Copy(source, 0, source, 1, source.Length - 1);
+                source[0] = lastElement;
+            }
         }
     }
 }

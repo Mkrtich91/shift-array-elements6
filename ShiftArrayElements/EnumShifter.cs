@@ -12,8 +12,58 @@
         /// <exception cref="InvalidOperationException">direction array contains an element that is not <see cref="Direction.Left"/> or <see cref="Direction.Right"/>.</exception>
         public static void Shift(int[] source, Direction[] directions)
         {
-            // TODO #1. Implement the method using "for" statements and indexers only (don't use Array.Copy method here).
-            throw new NotImplementedException();
+            if (source == null)
+            {
+            throw new ArgumentNullException(nameof(source));
+            }
+
+            if (directions == null)
+            {
+                throw new ArgumentNullException(nameof(directions));
+            }
+
+            for (int i = 0; i < directions.Length; i++)
+            {
+                Direction currentDirection = directions[i];
+
+                switch (currentDirection)
+                {
+                    case Direction.Left:
+                        ShiftLeft(source);
+                        break;
+
+                    case Direction.Right:
+                        ShiftRight(source);
+                        break;
+
+                    default:
+                        throw new InvalidOperationException($"Incorrect {currentDirection} enum value.");
+                }
+            }
+        }
+
+        private static void ShiftLeft(int[] source)
+        {
+            int temp = source[0];
+
+            for (int i = 0; i < source.Length - 1; i++)
+            {
+                source[i] = source[i + 1];
+            }
+
+            source[^1] = temp;
+        }
+
+        private static void ShiftRight(int[] source)
+        {
+            int temp = source[^1];
+
+            for (int i = source.Length - 1; i > 0; i--)
+            {
+                source[i] = source[i - 1];
+            }
+
+            source[0] = temp;
         }
     }
 }
