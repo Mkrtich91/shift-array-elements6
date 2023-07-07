@@ -25,14 +25,14 @@
             {
                 int currentIteration = iterations[i];
 
-                if (i % 2 == 0) // Even index or zero index indicates left shift iterations
+                if (i % 2 == 0)
                 {
                     for (int j = 0; j < currentIteration; j++)
                     {
                         ShiftLeft(source);
                     }
                 }
-                else // Odd index indicates right shift iterations
+                else
                 {
                     for (int j = 0; j < currentIteration; j++)
                     {
